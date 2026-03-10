@@ -1,11 +1,10 @@
-#!/usr/bin/env bash
-# Script: install-notunes.sh
-# Descripción: Instala y configura noTunes para bloquear la apertura automática de iTunes/Apple Music.
-# Requisitos: Homebrew instalado (se instalará si falta).
+#!/bin/bash
+# Descripcion: Instala y configura noTunes para bloquear la apertura automática de iTunes/Apple Music
+# Requisitos: Homebrew instalado (se instalará si falta)
 
 set -euo pipefail
 
-# Solo usar colores si la salida es una terminal (TTY)
+# Detección de TTY para colores condicionales
 if [ -t 1 ]; then
     RED='\033[0;31m'
     GREEN='\033[0;32m'
@@ -23,11 +22,11 @@ else
 fi
 
 check_homebrew() {
-    if ! command -v brew &> /dev/null; then
+    if ! command -v brew > /dev/null 2>&1; then
         echo -e "${YELLOW}Instalando Homebrew...${RESET}"
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     else
-        echo -e "${GREEN}✓ Homebrew ya está instalado.${RESET}"
+        echo -e "${GREEN}Homebrew ya está instalado${RESET}"
     fi
 }
 
@@ -45,16 +44,16 @@ configure_notunes() {
 }
 
 main() {
-    echo -e "\n${BOLD}${CYAN}🎧 Configuración de noTunes + Spotify${RESET}"
-    echo -e "${CYAN}────────────────────────────────────────────────────${RESET}"
+    echo -e "\n${BOLD}${CYAN}CONFIGURACIÓN DE NOTUNES + SPOTIFY${RESET}"
+    echo -e "${CYAN}===================================================${RESET}"
 
     check_homebrew
     install_notunes
     configure_notunes
 
-    echo -e "${CYAN}────────────────────────────────────────────────────${RESET}"
-    echo -e "${GREEN}${BOLD}Instalación completada.${RESET}"
-    echo -e "Por favor, abre noTunes desde Aplicaciones para activar el bloqueo."
+    echo -e "${CYAN}===================================================${RESET}"
+    echo -e "${GREEN}${BOLD}Instalación completada${RESET}"
+    echo -e "Abrir noTunes desde Aplicaciones para activar el bloqueo"
     echo ""
 }
 
