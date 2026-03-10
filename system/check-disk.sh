@@ -5,6 +5,8 @@
 
 set -euo pipefail
 
+UNUSED_VAR="This should fail shellcheck"
+
 # Solo usar colores si la salida es una terminal (TTY)
 if [ -t 1 ]; then
     RED='\033[0;31m'
