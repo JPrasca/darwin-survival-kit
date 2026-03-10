@@ -1,0 +1,46 @@
+name: Pipeline de Validación (CI)
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  lint-scripts:
+    name: Check Bash Scripts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Instalar ShellCheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+
+      - name: Validar sintaxis y buenas prácticas (.sh)
+        run: |
+          # Busca todos los archivos .sh y corre shellcheck
+          find . -name "*.sh" -exec shellcheck {} +
+          if [ $? -eq 0 ]; then
+            echo "✅ Todos los scripts pasaron la validación."
+          else
+            echo "❌ Se encontraron errores en los scripts."
+            exit 1
+          fi
+
+  verify-executables:
+    name: Verificar Permisos
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Asegurar que los scripts sean ejecutables
+        run: |
+          scripts=$(find . -name "*.sh")
+          for f in $scripts; do
+            if [ ! -x "$f" ]; then
+              echo "⚠️ El archivo $f no tiene permisos de ejecución. Corrigiendo..."
+              chmod +x "$f"
+            fi
+          done
