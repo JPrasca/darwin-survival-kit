@@ -76,7 +76,8 @@ main() {
     local search_name="$1"
     echo -e "\n${BOLD}${CYAN}Buscando aplicación: $search_name...${RESET}"
 
-    local app_path=$(find_app_path "$search_name")
+    local app_path
+    app_path=$(find_app_path "$search_name")
 
     if [ -z "$app_path" ]; then
         echo -e "${CYAN}Información: No se encontró la aplicación '$search_name'. Es posible que ya haya sido eliminada.${RESET}"
@@ -84,7 +85,8 @@ main() {
     fi
 
     echo -e "${GREEN}Encontrado: $app_path${RESET}"
-    local bundle_id=$(get_bundle_id "$app_path")
+    local bundle_id
+    bundle_id=$(get_bundle_id "$app_path")
     echo -e "${GREEN}Bundle ID: ${bundle_id:-No detectado}${RESET}"
 
     # Reglas especiales para apps complejas (excepciones manuales)
@@ -123,7 +125,8 @@ main() {
     fi
 
     # Cierre de procesos
-    local process_name=$(basename "$app_path" .app)
+    local process_name
+    process_name=$(basename "$app_path" .app)
     if pgrep -f "$process_name" > /dev/null; then
         echo -e "${CYAN}Cerrando procesos de $process_name...${RESET}"
         pkill -f "$process_name" || true

@@ -9,14 +9,12 @@ set -euo pipefail
 if [ -t 1 ]; then
     RED='\033[0;31m'
     GREEN='\033[0;32m'
-    YELLOW='\033[1;33m'
     CYAN='\033[0;36m'
     BOLD='\033[1m'
     RESET='\033[0m'
 else
     RED=''
     GREEN=''
-    YELLOW=''
     CYAN=''
     BOLD=''
     RESET=''
@@ -36,8 +34,10 @@ kill_vbox() {
 
 remove_files() {
     # Identificar el usuario real
-    local REAL_USER=$(logname 2>/dev/null || echo $USER)
-    local USER_HOME=$(eval echo ~$REAL_USER)
+    local REAL_USER
+    REAL_USER=$(logname 2>/dev/null || echo "$USER")
+    local USER_HOME
+    USER_HOME=$(eval echo ~"$REAL_USER")
 
     echo -e "${CYAN}Eliminando archivos y configuraciones...${RESET}"
     

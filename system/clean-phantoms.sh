@@ -69,7 +69,7 @@ purge_pattern() {
     done
 
     # Eliminar duplicados si los hay
-    IFS=$'\n' sorted_found=($(sort -u <<<"${found[*]}"))
+    mapfile -t sorted_found < <(sort -u <<<"${found[*]}")
     unset IFS
 
     if [[ ${#sorted_found[@]} -eq 0 ]]; then

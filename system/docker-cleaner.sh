@@ -40,8 +40,8 @@ clean_containers() {
     fi
 
     if confirm "Deseas DETENER y ELIMINAR TODOS los contenedores (incluyendo activos)"; then
-        docker stop $(docker ps -aq) 2>/dev/null || true
-        docker rm -f $(docker ps -aq) 2>/dev/null || true
+        docker ps -aq | xargs docker stop 2>/dev/null || true
+        docker ps -aq | xargs docker rm -f 2>/dev/null || true
         echo -e "${GREEN}Todos los contenedores han sido eliminados.${RESET}"
     else
         echo -e "${CYAN}Limpiando solo contenedores detenidos...${RESET}"
@@ -57,7 +57,7 @@ clean_images() {
     fi
 
     if confirm "Deseas eliminar TODAS las imágenes del sistema (incluso las usadas)"; then
-        docker rmi -f $(docker images -aq) 2>/dev/null || true
+        docker images -aq | xargs docker rmi -f 2>/dev/null || true
         echo -e "${GREEN}Todas las imágenes han sido eliminadas.${RESET}"
     else
         echo -e "${CYAN}Limpiando solo imágenes sin uso (dangling) o no referenciadas...${RESET}"
@@ -73,7 +73,7 @@ clean_volumes() {
     fi
 
     if confirm "Deseas eliminar ABSOLUTAMENTE TODOS los volúmenes"; then
-        docker volume rm $(docker volume ls -q) 2>/dev/null || true
+        docker volume ls -q | xargs docker volume rm 2>/dev/null || true
         echo -e "${GREEN}Todos los volúmenes han sido eliminados.${RESET}"
     else
         echo -e "${CYAN}Limpiando solo volúmenes huerfanos (dangling)...${RESET}"
