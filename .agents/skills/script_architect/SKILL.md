@@ -51,3 +51,10 @@ set -euo pipefail
   - `style`: Formateo, colores, eliminación de emojis.
   - `chore`: Mantenimiento general.
 - **Formato**: `<tipo>(<ámbito>): <descripción corta en minúsculas>`
+
+## 9. Estándares de Interfaz y Lenguaje (Neutralidad Técnica)
+- **Tono**: Evitar el uso de personas gramaticales (tú, usted, yo). Las interacciones deben ser impersonales y enfocadas en la acción.
+- **Mensajes de Estado**: Utilizar el gerundio para procesos activos (ej. "Escaneando...", "Analizando...").
+- **Confirmaciones**: Las preguntas deben ser directas y técnicas (ej. "¿Confirmar eliminación?", "¿Proceder con la ejecución?").
+- **Resultados**: Usar frases afirmativas de misión cumplida (ej. "Limpieza finalizada", "Proceso completado").
+- **Estética**: Evitar emojis en las salidas de consola. Usar encabezados en MAYÚSCULAS y divisores limpios (`---` o `===`) para separar secciones.

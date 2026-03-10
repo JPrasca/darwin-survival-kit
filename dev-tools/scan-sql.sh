@@ -49,7 +49,7 @@ scan_file() {
 main() {
     local base_dir="${1:-.}"
 
-    echo -e "\n${BOLD}${CYAN}🔍 Buscando SQL peligroso en: $base_dir${RESET}"
+    echo -e "\n${BOLD}${CYAN}--- BUSQUEDA DE PATRONES SQL: $base_dir ---${RESET}"
     echo -e "${CYAN}────────────────────────────────────────────────────${RESET}"
 
     # Encuentra todos los archivos .sql
@@ -60,7 +60,7 @@ main() {
     done < <(find "$base_dir" -type f -name "*.sql")
 
     if [ "$found" -eq 0 ]; then
-        echo -e "${GREEN}No se encontraron archivos .sql para analizar.${RESET}"
+        echo -e "${GREEN}Sin archivos .sql detectados para análisis.${RESET}"
     fi
 
     echo -e "${CYAN}────────────────────────────────────────────────────${RESET}\n"

@@ -31,7 +31,7 @@ check_deps() {
 }
 
 show_header() {
-    echo -e "\n${BOLD}${CYAN}📊 Estado del almacenamiento en macOS${RESET}"
+    echo -e "\n${BOLD}${CYAN}--- ESTADO DE ALMACENAMIENTO (MACOS) ---${RESET}"
     echo -e "${CYAN}────────────────────────────────────────────────────${RESET}"
 }
 

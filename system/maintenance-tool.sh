@@ -41,7 +41,7 @@ confirm() {
 }
 
 header() {
-    echo -e "\n${BOLD}${CYAN}🔧 $1${RESET}"
+    echo -e "\n${BOLD}${CYAN}--- ACCION: $1 ---${RESET}"
     echo -e "${CYAN}────────────────────────────────────────────────────${RESET}"
 }
 
@@ -82,10 +82,20 @@ clean_docker() {
 scan_sql_action() {
     local dir="${1:-.}"
     header "Análisis SQL Peligroso"
-    if command -v ./dev-tools/scan-sql.sh &>/dev/null; then
+    if [[ -f "./dev-tools/scan-sql.sh" ]]; then
         ./dev-tools/scan-sql.sh "$dir"
     else
         echo -e "${RED}Error: no se encontró ./dev-tools/scan-sql.sh${RESET}"
+        exit 1
+    fi
+}
+
+malware_hunter_action() {
+    header "Auditoría de Malware y Seguridad"
+    if [[ -f "./system/malware-hunter.sh" ]]; then
+        ./system/malware-hunter.sh
+    else
+        echo -e "${RED}Error: no se encontró ./system/malware-hunter.sh${RESET}"
         exit 1
     fi
 }
@@ -98,6 +108,7 @@ show_usage() {
     echo "  generic-uninstall <AppName>     Desinstala una App por nombre"
     echo "  docker-clean                    Ejecuta el limpiador de Docker"
     echo "  scan-sql <dir>                  Busca SQL peligroso en el directorio"
+    echo "  malware-hunter                  Ejecuta auditoría de seguridad"
     echo ""
 }
 
@@ -109,9 +120,10 @@ main() {
 
     case "$action" in
         list)
-            header "Acciones de Mantenimiento"
+            header "ACCIONES DE MANTENIMIENTO"
             echo "  - generic-uninstall          - docker-clean"
             echo "  - scan-sql                   - check-disk"
+            echo "  - malware-hunter"
             echo ""
             ;;
         generic-uninstall)
@@ -126,6 +138,9 @@ main() {
             ;;
         check-disk)
             ./system/check-disk.sh
+            ;;
+        malware-hunter)
+            malware_hunter_action
             ;;
         *)
             show_usage
