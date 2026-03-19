@@ -36,7 +36,13 @@ usage() {
 get_bundle_id() {
     local app_path="$1"
     if [ -d "$app_path" ]; then
-        mdls -name kMDItemCFBundleIdentifier -raw "$app_path" 2>/dev/null || echo ""
+        local b_id
+        b_id=$(mdls -name kMDItemCFBundleIdentifier -raw "$app_path" 2>/dev/null || echo "")
+        if [ "$b_id" == "(null)" ]; then
+            echo ""
+        else
+            echo "$b_id"
+        fi
     fi
 }
 
@@ -64,7 +70,11 @@ scan_for_residue() {
             local target_dir="$base/$sub"
             if [ -d "$target_dir" ]; then
                 # Buscar coincidencias con el nombre o el bundle ID
-                find "$target_dir" -maxdepth 2 \( -iname "*$keyword*" -o -iname "*$bundle*" \) 2>/dev/null
+                if [ -n "$bundle" ]; then
+                    find "$target_dir" -maxdepth 2 \( -iname "*$keyword*" -o -iname "*$bundle*" \) 2>/dev/null
+                else
+                    find "$target_dir" -maxdepth 2 -iname "*$keyword*" 2>/dev/null
+                fi
             fi
         done
     done
@@ -80,7 +90,7 @@ main() {
     app_path=$(find_app_path "$search_name")
 
     if [ -z "$app_path" ]; then
-        echo -e "${CYAN}Información: No se encontró la aplicación '$search_name'. Es posible que ya haya sido eliminada.${RESET}"
+        echo -e "${CYAN}Aplicación no encontrada. Posiblemente eliminada previamente.${RESET}"
         exit 0
     fi
 
@@ -117,7 +127,7 @@ main() {
     done
 
     echo -e "\n${YELLOW}${BOLD}ADVERTENCIA: Se eliminarán los archivos listados arriba.${RESET}"
-    read -p "¿Deseas proceder con la eliminación? (s/n): " -n 1 -r
+    read -p "¿Proceder con la eliminación? (s/n): " -n 1 -r
     echo ""
     if [[ ! $REPLY =~ ^[Ss]$ ]]; then
         echo -e "${CYAN}Operación cancelada.${RESET}"
@@ -140,7 +150,7 @@ main() {
         sudo rm -rf "$p" && echo -e "  Eliminado: $p" || echo -e "  Error al eliminar: $p"
     done
 
-    echo -e "\n${GREEN}${BOLD}La aplicación y sus residuos han sido eliminados correctamente.${RESET}\n"
+    echo -e "\n${GREEN}${BOLD}Limpieza finalizada. Aplicación y residuos eliminados.${RESET}\n"
 }
 
 main "$@"
