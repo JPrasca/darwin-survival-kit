@@ -25,9 +25,9 @@ Utilidades para flujos de desarrollo:
 - **`scan-sql.sh`**: Análisis preventivo de sentencias SQL peligrosas.
 - **`check-antigravity-quota.sh`**: Seguimiento de consumo y cuota de Gemini API.
 
-### 📦 [Setup](./setup/README.md) (Ver Guía de Uso)
+### 📦 Setup (Ver Guía de Uso)
 Configuración de entorno:
-- **`install-notunes.sh`**: Configura Spotify como reemplazo de Apple Music.
+(Módulo actualmente archivado).
 
 ---
 
