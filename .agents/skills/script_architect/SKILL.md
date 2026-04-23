@@ -50,7 +50,8 @@ set -euo pipefail
   - `docs`: Solo cambios en documentación.
   - `style`: Formateo, colores, eliminación de emojis.
   - `chore`: Mantenimiento general.
-- **Formato**: `<tipo>(<ámbito>): <descripción corta en minúsculas>`
+- **Formato**: `<tipo>(<ámbito>): <descripción corta en minúsculas en español>`
+- **Idioma**: Priorizar siempre el idioma español para los mensajes de commit y comentarios.
 
 ## 9. Estándares de Interfaz y Lenguaje (Neutralidad Técnica)
 - **Tono**: Evitar el uso de personas gramaticales (tú, usted, yo). Las interacciones deben ser impersonales y enfocadas en la acción.
