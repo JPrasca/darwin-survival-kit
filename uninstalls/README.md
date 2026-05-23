@@ -34,6 +34,8 @@ Herramientas optimizadas para aplicaciones persistentes con rutas de instalació
 | `uninstall-onedrive.sh` | Microsoft OneDrive | `./uninstalls/uninstall-onedrive.sh` |
 | `uninstall-lghub.sh` | Logitech G HUB | `./uninstalls/uninstall-lghub.sh` |
 | `uninstall-virtualbox.sh` | Oracle VirtualBox | `./uninstalls/uninstall-virtualbox.sh` |
+| `uninstall-imovie.sh` | Apple iMovie | `./uninstalls/uninstall-imovie.sh` |
+| `uninstall-garageband.sh` | Apple GarageBand | `./uninstalls/uninstall-garageband.sh` |
 
 **Nota:** Estos scripts barren no solo la aplicación, sino también sus extensiones de núcleo (kexts) y agentes de lanzamiento.
 
