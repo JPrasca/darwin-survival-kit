@@ -11,7 +11,8 @@ Conjunto de utilidades diseñado para la gestión eficiente del sistema, enfocad
 ### 🧹 [Uninstalls](./uninstalls/README.md) (Ver Guía de Uso)
 Herramientas para eliminar software de raíz, sin dejar residuos:
 - **`app-nuker.sh`**: Desinstalador universal con detección de Bundle IDs.
-- **`uninstall-office.sh`, `uninstall-onedrive.sh`, etc.**: Purga específica de suites persistentes.
+- **`uninstall-office.sh`, `uninstall-onedrive.sh`, `uninstall-lghub.sh`, `uninstall-virtualbox.sh`**: Purga específica de suites persistentes de terceros.
+- **`uninstall-imovie.sh`, `uninstall-garageband.sh`**: Eliminación completa de apps Apple preinstaladas, incluyendo bibliotecas de sonidos (Apple Loops) y artefactos de usuario.
 
 ### ⚙️ [System](./system/README.md) (Ver Guía de Uso)
 Mantenimiento y diagnóstico del núcleo del sistema:

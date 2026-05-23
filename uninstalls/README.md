@@ -37,7 +37,55 @@ Herramientas optimizadas para aplicaciones persistentes con rutas de instalació
 | `uninstall-imovie.sh` | Apple iMovie | `./uninstalls/uninstall-imovie.sh` |
 | `uninstall-garageband.sh` | Apple GarageBand | `./uninstalls/uninstall-garageband.sh` |
 
-**Nota:** Estos scripts barren no solo la aplicación, sino también sus extensiones de núcleo (kexts) y agentes de lanzamiento.
+**Nota:** Algunos scripts incluyen eliminación de extensiones de núcleo (kexts) y agentes de lanzamiento según la aplicación objetivo. Los desinstaladores de apps Apple (iMovie, GarageBand) no contemplan kexts, ya que no los utilizan.
+
+---
+
+### `uninstall-imovie.sh`
+Elimina iMovie y todos sus artefactos de usuario del sistema.
+
+**Rutas eliminadas:**
+- `/Applications/iMovie.app`
+- `~/Library/Containers/com.apple.iMovieApp`
+- `~/Library/Caches/com.apple.iMovieApp`
+- `~/Library/Preferences/com.apple.iMovieApp.plist`
+- `~/Library/Application Scripts/com.apple.iMovieApp`
+- Archivos SFL de documentos recientes
+
+**Uso:**
+```bash
+./uninstalls/uninstall-imovie.sh
+```
+
+> [!NOTE]
+> Los proyectos guardados en `~/Movies/` no son eliminados por este script.
+
+---
+
+### `uninstall-garageband.sh`
+Elimina GarageBand, sus bibliotecas de sonidos (Apple Loops) y todos sus artefactos de usuario del sistema.
+
+**Rutas eliminadas:**
+- `/Applications/GarageBand.app`
+- `/Library/Application Support/GarageBand`
+- `/Library/Application Support/iLifeMediaBrowser/Plug-Ins/iLMBGarageBandPlugin.ilmbplugin`
+- `/Library/Audio/Apple Loops/Apple/Apple Loops for GarageBand`
+- `~/Library/Containers/com.apple.garageband10`
+- `~/Library/Containers/com.apple.STMExtension.GarageBand`
+- `~/Library/Application Scripts/com.apple.garageband10`
+- `~/Library/Caches/com.apple.garageband` y preferencias
+- Archivos SFL de documentos recientes
+
+**Uso:**
+```bash
+./uninstalls/uninstall-garageband.sh
+```
+
+> [!WARNING]
+> Las Apple Loops en `/Library/Audio/Apple Loops/Apple/` pueden ser compartidas con Logic Pro o MainStage. Verificar antes de ejecutar si alguna de estas aplicaciones está instalada.
+
+> [!NOTE]
+> Los proyectos guardados en `~/Music/` no son eliminados por este script.
 
 ---
 
