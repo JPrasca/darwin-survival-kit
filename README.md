@@ -13,6 +13,7 @@ Herramientas para eliminar software de raíz, sin dejar residuos:
 - **`app-nuker.sh`**: Desinstalador universal con detección de Bundle IDs.
 - **`uninstall-office.sh`, `uninstall-onedrive.sh`, `uninstall-lghub.sh`, `uninstall-virtualbox.sh`**: Purga específica de suites persistentes de terceros.
 - **`uninstall-imovie.sh`, `uninstall-garageband.sh`**: Eliminación completa de apps Apple preinstaladas, incluyendo bibliotecas de sonidos (Apple Loops) y artefactos de usuario.
+- **`uninstall-gemini.sh`**: Purga completa de Google Gemini Desktop, incluyendo agentes de lanzamiento, cachés y datos de soporte.
 
 ### ⚙️ [System](./system/README.md) (Ver Guía de Uso)
 Mantenimiento y diagnóstico del núcleo del sistema:
