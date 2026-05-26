@@ -36,6 +36,7 @@ Herramientas optimizadas para aplicaciones persistentes con rutas de instalació
 | `uninstall-virtualbox.sh` | Oracle VirtualBox | `./uninstalls/uninstall-virtualbox.sh` |
 | `uninstall-imovie.sh` | Apple iMovie | `./uninstalls/uninstall-imovie.sh` |
 | `uninstall-garageband.sh` | Apple GarageBand | `./uninstalls/uninstall-garageband.sh` |
+| `uninstall-gemini.sh` | Google Gemini Desktop | `./uninstalls/uninstall-gemini.sh` |
 
 **Nota:** Algunos scripts incluyen eliminación de extensiones de núcleo (kexts) y agentes de lanzamiento según la aplicación objetivo. Los desinstaladores de apps Apple (iMovie, GarageBand) no contemplan kexts, ya que no los utilizan.
 
@@ -86,6 +87,32 @@ Elimina GarageBand, sus bibliotecas de sonidos (Apple Loops) y todos sus artefac
 
 > [!NOTE]
 > Los proyectos guardados en `~/Music/` no son eliminados por este script.
+
+---
+
+### `uninstall-gemini.sh`
+Elimina Gemini Desktop (Google) y todos sus artefactos del sistema.
+
+**Rutas eliminadas:**
+- `/Applications/Gemini.app`
+- `~/Library/Application Support/Gemini`
+- `~/Library/Application Support/com.google.GeminiMacOS` y `.launcher`
+- `~/Library/Caches/com.google.GeminiMacOS` y `.launcher`
+- `~/Library/Preferences/com.google.GeminiMacOS*.plist`
+- `~/Library/Containers/com.google.GeminiMacOS` y `.launcher`
+- `~/Library/Application Scripts/com.google.GeminiMacOS` y `.launcher`
+- `~/Library/Saved Application State/com.google.GeminiMacOS.savedState`
+- `~/Library/WebKit/com.google.GeminiMacOS`
+- `~/Library/HTTPStorages/com.google.GeminiMacOS*`
+- `~/Library/LaunchAgents/com.google.GeminiMacOS.launcher.plist` (descargado vía `launchctl`)
+
+**Uso:**
+```bash
+./uninstalls/uninstall-gemini.sh
+```
+
+> [!NOTE]
+> Los datos de cuenta de Google no se ven afectados por este script.
 
 ---
 
