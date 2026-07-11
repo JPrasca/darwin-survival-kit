@@ -27,9 +27,10 @@ Utilidades para flujos de desarrollo:
 - **`scan-sql.sh`**: Análisis preventivo de sentencias SQL peligrosas.
 - **`check-antigravity-quota.sh`**: Seguimiento de consumo y cuota de Gemini API.
 
-### 📦 Setup (Ver Guía de Uso)
+### 📦 [Setup](./setup/README.md) (Ver Guía de Uso)
 Configuración de entorno:
-(Módulo actualmente archivado).
+- **`setup_brew.sh`**: Configuración inicial de Homebrew y utilidades.
+- **`setup_ssh.sh`**: Generación y verificación automatizada de claves SSH.
 
 ---
 
