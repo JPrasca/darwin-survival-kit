@@ -36,5 +36,15 @@ Monitor de consumo para la API de Gemini (Antigravity). Permite ver el uso actua
 
 ---
 
+### 3. `scan-secrets.sh`
+Auditoría de seguridad para detectar datos sensibles (claves privadas, API keys, tokens) en el historial del repositorio utilizando `gitleaks`.
+
+**Uso:**
+```bash
+./dev-tools/scan-secrets.sh
+```
+
+---
+
 > [!TIP]
 > Estas herramientas son útiles para fases de pre-commit o auditoría de proyectos locales antes de la integración continua.
