@@ -1,0 +1,29 @@
+image: ubuntu:latest
+
+pipelines:
+  default:
+    - parallel:
+        - step:
+            name: Check Bash Scripts
+            script:
+              - apt-get update && apt-get install -y shellcheck
+              - find . -name "*.sh" -exec shellcheck {} +
+              - echo "✅ Todos los scripts pasaron la validación."
+
+        - step:
+            name: Verificar Permisos
+            script:
+              - |
+                scripts=$(find . -name "*.sh")
+                for f in $scripts; do
+                  if [ ! -x "$f" ]; then
+                    echo "❌ El archivo $f no tiene permisos de ejecución."
+                    exit 1
+                  fi
+                done
+
+        - step:
+            name: Escaneo de Secretos (Gitleaks)
+            image: zricethezav/gitleaks:latest
+            script:
+              - gitleaks detect -v --source .
