@@ -31,6 +31,9 @@ Utilidades para flujos de desarrollo:
 Configuración de entorno:
 - **`setup_brew.sh`**: Configuración inicial de Homebrew y utilidades.
 - **`setup_ssh.sh`**: Generación y verificación automatizada de claves SSH.
+- **`setup_precommit.sh`**: Protección de commits con detección de secretos vía gitleaks.
+- **`setup_terminal.sh`**: Configuración y embellecimiento de la terminal con respaldos automáticos.
+- **`revert_terminal.sh`**: Restauración completa de la configuración previa de terminal.
 
 ---
 
