@@ -84,9 +84,9 @@ cleanup() {
 }
 
 main() {
-    check_privileges
+    check_privileges "$@"
     confirm_action
     cleanup
 }
 
-main
+main "$@"
