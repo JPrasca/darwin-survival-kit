@@ -18,33 +18,37 @@ else
 fi
 
 # Detectar usuario original
-USER_HOME=$(eval echo "~${SUDO_USER:-$USER}")
+if [ -n "${SUDO_USER:-}" ]; then
+    USER_HOME=$(dscl . -read "/Users/$SUDO_USER" NFSHomeDirectory | awk '{print $2}')
+else
+    USER_HOME=$HOME
+fi
 
 # Funciones
 confirm_action() {
-    echo -e "${YELLOW}=== DESINSTALACIÓN DE ADGUARD ===${RESET}"
+    printf "%b\n" "${YELLOW}=== DESINSTALACIÓN DE ADGUARD ===${RESET}"
     echo "¿Confirmar eliminación de AdGuard y todos sus componentes? [s/N]"
     read -r response
     if [[ ! "$response" =~ ^[sS]$ ]]; then
-        echo -e "${RED}PROCESO CANCELADO.${RESET}"
+        printf "%b\n" "${RED}PROCESO CANCELADO.${RESET}"
         exit 1
     fi
 }
 
 check_privileges() {
     if [[ $EUID -ne 0 ]]; then
-        echo -e "${YELLOW}ESTE SCRIPT REQUIERE PRIVILEGIOS DE ADMINISTRADOR.${RESET}"
-        echo -e "${YELLOW}EJECUTANDO CON SUDO...${RESET}"
+        printf "%b\n" "${YELLOW}ESTE SCRIPT REQUIERE PRIVILEGIOS DE ADMINISTRADOR.${RESET}"
+        printf "%b\n" "${YELLOW}EJECUTANDO CON SUDO...${RESET}"
         exec sudo "$0" "$@"
     fi
 }
 
 cleanup() {
-    echo -e "${YELLOW}CERRANDO PROCESOS DE ADGUARD...${RESET}"
+    printf "%b\n" "${YELLOW}CERRANDO PROCESOS DE ADGUARD...${RESET}"
     pkill -9 "AdGuard" || true
     pkill -9 "AdGuard Safari Assistant" || true
 
-    echo -e "${YELLOW}ELIMINANDO ARCHIVOS...${RESET}"
+    printf "%b\n" "${YELLOW}ELIMINANDO ARCHIVOS...${RESET}"
     
     local paths=(
         "/Applications/AdGuard Mini.app"
@@ -69,14 +73,14 @@ cleanup() {
             echo "Eliminando: $path"
             if ! rm -rf "$path" 2>/dev/null; then
                 # Fallback usando AppleScript para carpetas protegidas por macOS (SIP/TCC)
-                echo -e "${YELLOW}Usando Finder para eliminar archivo protegido...${RESET}"
+                printf "%b\n" "${YELLOW}Usando Finder para eliminar archivo protegido...${RESET}"
                 osascript -e "tell application \"Finder\" to delete POSIX file \"$path\"" > /dev/null 2>&1 || true
             fi
         fi
     done
 
-    echo -e "${GREEN}LIMPIEZA FINALIZADA.${RESET}"
-    echo -e "${GREEN}PROCESO COMPLETADO.${RESET}"
+    printf "%b\n" "${GREEN}LIMPIEZA FINALIZADA.${RESET}"
+    printf "%b\n" "${GREEN}PROCESO COMPLETADO.${RESET}"
 }
 
 main() {
